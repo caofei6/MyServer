@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<!-- setting encoding,DynamicMethod,language <constant name="struts.custom.i18n.resources" 
+		value="messageResource"></constant> -->
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+
+	
+	<!-- add package here extends="struts-default" -->
+	<package name="json" extends="json-default"> <!--需要将struts-default改为json-default -->
+		<!-- setting action -->
+		
+		<action name="login" class="com.weixiu.action.LoginAction" method="login">
+			<result type="json"></result>
+		</action>
+		
+		<action name="register" class="com.weixiu.action.RegisterAction" method="register">
+			<result type="json"></result>
+		</action>
+		
+		<action name="unRegister" class="com.weixiu.action.UnRegisterAction" method="unRegister">
+			<result type="json"></result>
+		</action>
+		
+		<action name="completeStore" class="com.weixiu.action.CompleteStoreInfoAction" method="updateInfo">
+			<result type="json"></result>
+		</action>
+		
+		<action name="updatePassword" class="com.weixiu.action.UpdatePasswordAction" method="updatePassword">
+			<result type="json"></result>
+		</action>
+		
+		<action name="updateStore" class="com.weixiu.action.UpdateStoreAction" method="updateStore">
+			<result type="json"></result>
+		</action>
+		
+		
+		<action name="selectOrder" class="com.weixiu.action.SelectOrderAction" method="order">
+			<result type="json"></result>
+		</action>
+		
+		<action name="updateOrder" class="com.weixiu.action.ProcessOrderAction" method="order">
+			<result type="json"></result>
+		</action>
+
+	</package>
+</struts>
