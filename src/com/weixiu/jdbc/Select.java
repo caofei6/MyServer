@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.weixiu.model.Comment;
 import com.weixiu.model.Order;
 import com.weixiu.model.Store;
 import com.weixiu.model.StoreAllInfor;
@@ -235,6 +236,29 @@ public class Select {
 
 	}
 	
+	public static String getOrderTimeByOrderID(String orderID){
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		try{
+			connection = Connect_mysql.getConnection();
+			String sql = "SELECT OrderTime FROM Orders WHERE OrderID = ?";
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, orderID);
+			rs = preparedStatement.executeQuery();
+			rs.next();
+			String OrderTime = rs.getString("OrderTime");
+			System.out.println("∂©µ•ID: " + orderID + ", OrderTime: " + OrderTime);
+			connection.close();
+			preparedStatement.close();
+			rs.close();
+			return OrderTime;
+		} catch (SQLException e) {
+			System.out.println("≤È—Øid ß∞‹, " + e.getMessage());
+		}
+		return null;
+	}
+	
 	public static Boolean isEffectivePhone(String phone){
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -298,6 +322,35 @@ public class Select {
 		}
 		return null;
 
+	}
+	
+	public static List<Comment> getCommentByStoreID(String storeID){
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		List<Comment> list = new ArrayList<Comment>();
+		try{
+			connection = Connect_mysql.getConnection();
+			String sql = "SELECT * FROM StoreComment WHERE StoreID = ?";
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, storeID);
+			rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				Comment comment = new Comment();
+				comment.setIsRequest(true);
+				comment.setMarkTime(rs.getString("CommentTime"));
+				comment.setMarkName(Select.getNameByUserID(rs.getString("UserID")));
+				comment.setMarkContent(rs.getString("OrderComment"));
+				list.add(comment);
+			}
+			connection.close();
+			preparedStatement.close();
+			rs.close();
+			return list;
+		} catch (SQLException e) {
+			System.out.println("≤È—Øid ß∞‹, " + e.getMessage());
+		}
+		return null;
 	}
 	
 	

@@ -12,7 +12,8 @@ public class Test {
 //		Select.isEffectivePhone("188254474");
 //		Select.getNameByUserID("3");
 //		Select.getPhoneByUserID("1");
-		Select.getOrder("2", "正在处理");
+		String time = Select.getOrderTimeByOrderID("2");
+		System.out.println(time);
 		
    
 	}

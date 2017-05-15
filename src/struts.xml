@@ -44,7 +44,11 @@
 			<result type="json"></result>
 		</action>
 		
-		<action name="updateOrder" class="com.weixiu.action.ProcessOrderAction" method="order">
+		<action name="processOrder" class="com.weixiu.action.ProcessOrderAction" method="order">
+			<result type="json"></result>
+		</action>
+		
+		<action name="selectComment" class="com.weixiu.action.SelectCommentAction" method="getComment">
 			<result type="json"></result>
 		</action>
 

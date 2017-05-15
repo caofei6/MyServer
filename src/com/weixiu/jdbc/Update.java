@@ -62,14 +62,15 @@ public class Update {
 		return false;
 	}
 	
-	public static Boolean updateOrderStatus(String OrderID, String Status) {
+	public static Boolean updateOrderStatus(String OrderID, String Status, String AcceptTime) {
 		Connection con = Connect_mysql.getConnection();
-		String sql = "UPDATE Orders SET OrderStat = ? WHERE OrderID = ?";
+		String sql = "UPDATE Orders SET OrderStat = ?, OrderTime = ? WHERE OrderID = ?";
 		PreparedStatement pstmt;
 		try{
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, Status);
-			pstmt.setString(2, OrderID);
+			pstmt.setString(2, AcceptTime);				
+			pstmt.setString(3, OrderID);
 			pstmt.executeUpdate();
 			System.out.println("恭喜你，更新状态成功");
 			pstmt.close();
